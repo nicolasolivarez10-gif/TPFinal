@@ -2,7 +2,7 @@
 
 Trabajo Final de **Sistemas Operativos** — Tecnicatura Superior en Desarrollo de Software, Instituto Superior IDRA.
 
-**Integrantes:** _(completar con los nombres del grupo)_
+**Integrantes:** Nicolas Olivarez, Rodrigo Curcuy y Jeremias Magliore.
 
 ## Descripción
 
@@ -31,7 +31,7 @@ trabajo-final-so/
 
 ## Requisitos
 
-- Linux con Bash (probado en Raspberry Pi OS / Debian y Ubuntu)
+- Linux con Bash (probado en Raspberry Pi OS / Debian)
 - Herramientas estándar que ya vienen instaladas: `tar`, `find`, `df`, `free`, `numfmt`
 - No requiere permisos de administrador
 
