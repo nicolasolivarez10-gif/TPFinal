@@ -160,7 +160,7 @@ done
 - La **validación** usa una expresión regular: solo acepta un único dígito entre 0 y 3. Si no, muestra un error en rojo y vuelve a mostrar el menú (`continue`).
 - `case` llama a la función de la tarea elegida.
 - La opción `0` ejecuta `exit 0` y detiene el script.
-
+![Menu del programa](docs/VirtualBox_Nicolas_08_11_2026_18_48_34.png)
 ---
 
 ## 4. Pruebas y validación
@@ -172,7 +172,6 @@ Ingresar `x`, `9` y una entrada vacía. Resultado esperado:
 ```
 [ERROR] Opción inválida: 'x'. Ingrese un número del 0 al 3.
 ```
-(VirtualBox_Nicolas_08_11_2026_18_48_34.png)
 
 ### Opción 1 — Respaldo
 
