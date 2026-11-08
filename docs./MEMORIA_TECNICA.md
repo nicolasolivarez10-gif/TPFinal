@@ -172,8 +172,7 @@ Ingresar `x`, `9` y una entrada vacía. Resultado esperado:
 ```
 [ERROR] Opción inválida: 'x'. Ingrese un número del 0 al 3.
 ```
-
-📷 _Captura: menú principal y error por opción inválida._
+(VirtualBox_Nicolas_08_11_2026_18_48_34.png)
 
 ### Opción 1 — Respaldo
 
