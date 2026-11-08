@@ -2,7 +2,7 @@
 
 Trabajo Final de **Sistemas Operativos** — Tecnicatura Superior en Desarrollo de Software, Instituto Superior IDRA.
 
-**Integrantes:** Nicolas Olivarez, Rodrigo Curcuy y Jeremias Magliore.
+**Integrantes:** Nicolas Olivarez, Rodrigo Curcuy y Jeremias Maglione.
 
 ## Descripción
 
