@@ -248,22 +248,7 @@ Muestra "Hasta luego." y termina el script. El log `logs/mantenimiento.log` qued
 
 ## 5. Reflexiones finales
 
-### 5.1 Dificultades encontradas
-
-- **Uso actual de la CPU:** una única lectura de `/proc/stat` da el promedio desde el arranque; se resolvió leyendo dos veces con 1 segundo de diferencia.
-- **Decimales en Bash:** Bash solo calcula con enteros, así que se usó `awk` para los porcentajes.
-- **Idioma del sistema:** `free` escribe `Mem.:` en español, lo que rompía el filtro; se resolvió con `LC_ALL=C`.
-- **Nombres con espacios:** se usaron comillas en todas las variables.
-- **Evitar borrar de más:** se limitó el borrado de backups con `-name` y `-maxdepth 1`.
-
-### 5.2 Posibles mejoras
-
-- Incorporar las demás tareas del enunciado: control de disco con alertas, monitoreo de servicios, programación con `cron`, usuarios, actualizaciones, limpieza de temporales y `rsync`.
-- Programar el backup automático con `cron`.
-- Rotación de logs y notificaciones por correo ante una alerta.
-- Cifrar los backups y verificar su integridad con `sha256sum`.
-
-### 5.3 Conclusión
+### Conclusión
 
 El trabajo permitió aplicar en un caso concreto conceptos de la cursada: comandos de archivos y procesos, redirecciones y tuberías, compresión con `tar`, búsqueda con `find`, lectura de `/proc` y scripting en Bash. Un script modular, con funciones y archivo de configuración, es fácil de entender y de ampliar.
 
