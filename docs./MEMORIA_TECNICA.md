@@ -165,18 +165,7 @@ done
 
 ## 4. Pruebas y validación
 
-> **Importante:** repetir estas pruebas en la máquina virtual y **agregar capturas de pantalla** donde se indica (por ejemplo en una carpeta `docs/img/`).
-
-### 4.1 Preparar un entorno de prueba
-
-```bash
-mkdir -p ~/prueba/datos
-echo "hola" > ~/prueba/datos/a.txt
-dd if=/dev/zero of=~/prueba/datos/grande.bin bs=1M count=12    # archivo de 12 MB
-touch -d '20 days ago' ~/backups/backup_datos_20200101_000000.tar.gz   # backup "viejo" falso
-```
-
-### 4.2 Validación del menú
+### Validación del menú
 
 Ingresar `x`, `9` y una entrada vacía. Resultado esperado:
 
@@ -186,7 +175,7 @@ Ingresar `x`, `9` y una entrada vacía. Resultado esperado:
 
 📷 _Captura: menú principal y error por opción inválida._
 
-### 4.3 Opción 1 — Respaldo
+### Opción 1 — Respaldo
 
 Directorio: `~/prueba/datos`. Resultado obtenido:
 
@@ -198,10 +187,10 @@ Directorio: `~/prueba/datos`. Resultado obtenido:
 /tmp/p/bk/backup_origen_20200101_000000.tar.gz
 ```
 
-Comprobación: `ls ~/backups` y `tar -tzf ~/backups/backup_datos_*.tar.gz` (lista el contenido).
+
 Con un directorio inexistente se muestra `[ERROR] El directorio '...' no existe.`
 
-📷 _Captura: ejecución del backup y listado de `~/backups`._
+
 
 ### 4.4 Opción 2 — Informe de recursos
 
@@ -216,11 +205,11 @@ Filesystem  Size  Used Avail Use% Mounted on
 /dev/vda    252G  8.0G   10G  45% /
 ```
 
-Se verifica que el informe quedó guardado: `cat logs/informe_recursos.log`. Para ver variar la CPU, abrir otra terminal y ejecutar `yes > /dev/null` (detener con Ctrl+C).
+Se verifica que el informe quedó guardado: `cat logs/informe_recursos.log`. 
 
 📷 _Captura: informe en pantalla y contenido del archivo._
 
-### 4.5 Opción 3 — Archivos grandes
+### Opción 3 — Archivos grandes
 
 Con directorio `~/prueba/datos` y mínimo 10 MB:
 
