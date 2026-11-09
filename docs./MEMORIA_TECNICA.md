@@ -2,7 +2,7 @@
 
 **Materia:** Sistemas Operativos
 **Instituto:** Instituto Superior IDRA — Tecnicatura Superior en Desarrollo de Software
-**Integrantes:** _(completar)_
+**Integrantes:** Nicolas Olivarez, Rodrigo Curcuy y Jeremias Maglione
 **Fecha:** Noviembre de 2026
 
 ---
@@ -173,7 +173,8 @@ Ingresar `x`, `9` y una entrada vacía. Resultado esperado:
 ```
 [ERROR] Opción inválida: 'x'. Ingrese un número del 0 al 3.
 ```
-
+![Validacion del menu](VirtualBox_Nicolas_08_11_2026_19_04_17.png)
+![Validacion del menu](VirtualBox_Nicolas_08_11_2026_19_04_45.png)
 ### Opción 1 — Respaldo
 
 Directorio: `~/prueba/datos`. Resultado obtenido:
@@ -185,13 +186,13 @@ Directorio: `~/prueba/datos`. Resultado obtenido:
 [OK] Backups antiguos eliminados:
 /tmp/p/bk/backup_origen_20200101_000000.tar.gz
 ```
-
+![Respaldo de directorio:](VirtualBox_Nicolas_08_11_2026_20_51_33.png)
 
 Con un directorio inexistente se muestra `[ERROR] El directorio '...' no existe.`
 
 
 
-### 4.4 Opción 2 — Informe de recursos
+### Opción 2 — Informe de recursos
 
 ```
 --- CPU ---
@@ -206,7 +207,7 @@ Filesystem  Size  Used Avail Use% Mounted on
 
 Se verifica que el informe quedó guardado: `cat logs/informe_recursos.log`. 
 
-📷 _Captura: informe en pantalla y contenido del archivo._
+![Informe de recursos](VirtualBox_Nicolas_08_11_2026_20_50_39.png)
 
 ### Opción 3 — Archivos grandes
 
@@ -217,12 +218,12 @@ TAMAÑO     UBICACIÓN
 12M        /tmp/p/origen/grande.bin
 [OK] Se listaron 1 archivo(s). Informe en /tmp/p/logs/archivos_grandes.log
 ```
-
+![Archivos grandes](VirtualBox_Nicolas_08_11_2026_20_51_15.png)
 Con mínimo `abc` se muestra `[ERROR] El tamaño debe ser un número entero positivo`. Con un mínimo mayor al archivo más grande, informa que no se encontraron archivos.
 
-📷 _Captura: listado de archivos grandes._
+![Error archivos grandes](VirtualBox_Nicolas_08_11_2026_20_52_39.png)
 
-### 4.6 Opción 0 — Salir
+### Opción 0 — Salir
 
 Muestra "Hasta luego." y termina el script. El log `logs/mantenimiento.log` queda con el registro de todo lo realizado:
 
