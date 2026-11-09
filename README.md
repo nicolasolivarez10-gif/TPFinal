@@ -10,7 +10,7 @@ Script en Bash con un **menú interactivo** que automatiza tres tareas de admini
 
 | Opción | Tarea | Qué hace |
 |:------:|-------|----------|
-| 1 | Respaldo | Comprime un directorio en `.tar.gz` y elimina los backups más viejos que N días |
+| 1 | Respaldo | Comprime un directorio en `.tar.gz`(archivo parecido a .zip en windows) y elimina los backups más viejos que N días |
 | 2 | Informe de recursos | Muestra y guarda en un log el uso de CPU, memoria y disco |
 | 3 | Archivos grandes | Busca archivos que superen un tamaño configurable y los lista de mayor a menor con su ubicación |
 | 0 | Salir | Detiene la ejecución del script |
@@ -72,9 +72,13 @@ CANTIDAD_GRANDES=20               # máximo de archivos listados
 
 ## Cómo colaborar
 -Hacer un fork del repositorio.
+
 -Crear una rama: git checkout -b feature/mi-mejora.
+
 -Verificar la sintaxis con bash -n mantenimiento.sh.
+
 -Hacer commit y subir la rama.
+
 -Abrir un Pull Request explicando el cambio.
 ## Licencia
 
