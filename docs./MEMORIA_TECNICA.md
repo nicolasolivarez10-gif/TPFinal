@@ -43,8 +43,8 @@ Se desarrolló y probó en una máquina virtual (VirtualBox) con Raspberry Pi OS
 Ejecución:
 
 ```bash
-git clone https://github.com/<usuario>/trabajo-final-so.git
-cd trabajo-final-so
+git clone https://github.com/nicolasolivarez10-gif/TPFinal.git
+cd TPFinal
 chmod +x mantenimiento.sh
 ./mantenimiento.sh
 ```
@@ -219,6 +219,7 @@ TAMAÑO     UBICACIÓN
 [OK] Se listaron 1 archivo(s). Informe en /tmp/p/logs/archivos_grandes.log
 ```
 ![Archivos grandes](VirtualBox_Nicolas_08_11_2026_20_51_15.png)
+
 Con mínimo `abc` se muestra `[ERROR] El tamaño debe ser un número entero positivo`. Con un mínimo mayor al archivo más grande, informa que no se encontraron archivos.
 
 ![Error archivos grandes](VirtualBox_Nicolas_08_11_2026_20_52_39.png)
@@ -227,11 +228,7 @@ Con mínimo `abc` se muestra `[ERROR] El tamaño debe ser un número entero posi
 
 Muestra "Hasta luego." y termina el script. El log `logs/mantenimiento.log` queda con el registro de todo lo realizado:
 
-```
-2026-11-08 16:48:47 - OK: Backup creado: ...
-2026-11-08 16:48:48 - ERROR: El tamaño debe ser un número entero positivo (ingresó 'abc').
-2026-11-08 16:48:48 - Script finalizado
-```
+![Salir](VirtualBox_Nicolas_08_11_2026_21_07_00.png)
 
 ---
 
@@ -247,3 +244,10 @@ El trabajo permitió aplicar en un caso concreto conceptos de la cursada: comand
 
 - `man bash`, `man find`, `man tar`, `man df`, `man free`
 - Apuntes de la cátedra: *Linux Bash Shell Cheat Sheet* y *Markdown Cheat Sheet* (opensource.com)
+
+---
+
+## 7. Dificultades encontradas
+.Instalacion de virtualbox por mal configuramiento
+.Problemas en los script por error en el codigo
+
