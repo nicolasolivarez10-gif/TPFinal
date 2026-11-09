@@ -179,31 +179,14 @@ Ingresar `x`, `9` y una entrada vacía. Resultado esperado:
 
 Directorio: `~/prueba/datos`. Resultado obtenido:
 
-```
-[i] Comprimiendo '/tmp/p/origen' ...
-[OK] Backup creado: /tmp/p/bk/backup_origen_20261108_164847.tar.gz (16K)
-[i] Buscando backups con más de 7 días...
-[OK] Backups antiguos eliminados:
-/tmp/p/bk/backup_origen_20200101_000000.tar.gz
-```
 ![Respaldo de directorio:](VirtualBox_Nicolas_08_11_2026_20_51_33.png)
 
 Con un directorio inexistente se muestra `[ERROR] El directorio '...' no existe.`
 
+![No existe directorio](VirtualBox_Nicolas_08_11_2026_21_22_54.png)
 
 
 ### Opción 2 — Informe de recursos
-
-```
---- CPU ---
-Uso actual de CPU : 0.0 %
-Carga promedio    : 0.00 0.00 0.00  (1, 5 y 15 min)
---- MEMORIA ---
-RAM: 199 MB usados de 3990 MB (5.0%)
---- DISCO ---
-Filesystem  Size  Used Avail Use% Mounted on
-/dev/vda    252G  8.0G   10G  45% /
-```
 
 Se verifica que el informe quedó guardado: `cat logs/informe_recursos.log`. 
 
@@ -211,13 +194,6 @@ Se verifica que el informe quedó guardado: `cat logs/informe_recursos.log`.
 
 ### Opción 3 — Archivos grandes
 
-Con directorio `~/prueba/datos` y mínimo 10 MB:
-
-```
-TAMAÑO     UBICACIÓN
-12M        /tmp/p/origen/grande.bin
-[OK] Se listaron 1 archivo(s). Informe en /tmp/p/logs/archivos_grandes.log
-```
 ![Archivos grandes](VirtualBox_Nicolas_08_11_2026_20_51_15.png)
 
 Con mínimo `abc` se muestra `[ERROR] El tamaño debe ser un número entero positivo`. Con un mínimo mayor al archivo más grande, informa que no se encontraron archivos.
@@ -249,5 +225,6 @@ El trabajo permitió aplicar en un caso concreto conceptos de la cursada: comand
 
 ## 7. Dificultades encontradas
 .Instalacion de virtualbox por mal configuramiento
+
 .Problemas en los script por error en el codigo
 
