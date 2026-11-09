@@ -1,4 +1,4 @@
-# 🛠️ Herramienta de Mantenimiento del Sistema (Bash)
+# 🛠️ Administracion de un sistema Linux
 
 Trabajo Final de **Sistemas Operativos** — Tecnicatura Superior en Desarrollo de Software, Instituto Superior IDRA.
 
@@ -32,7 +32,12 @@ trabajo-final-so/
 ## Requisitos
 
 - Linux con Bash (probado en Raspberry Pi OS / Debian)
-- Herramientas estándar que ya vienen instaladas: `tar`, `find`, `df`, `free`, `numfmt`
+- Herramientas estándar que ya vienen instaladas en linux: `tar`, `find`, `df`, `free`, `numfmt`
+- tar: arma el archivo comprimido del backup (opción 1).
+- find: busca archivos. Lo usa para borrar los backups viejos (opción 1) y para encontrar los archivos grandes (opción 3).
+- df: muestra el espacio usado y libre de los discos (opción 2).
+- free: muestra la memoria RAM usada y libre (opción 2).
+- numfmt: convierte números grandes a un formato legible. Por ejemplo, 12582912 pasa a verse como 12M (opción 3).
 - No requiere permisos de administrador
 
 ## Uso
@@ -42,22 +47,6 @@ git clone https://github.com/<usuario>/trabajo-final-so.git
 cd trabajo-final-so
 chmod +x mantenimiento.sh
 ./mantenimiento.sh
-```
-
-### Ejemplo: backup
-
-```
-Seleccione una opción [0-3]: 1
-Directorio a respaldar [/home/pi/Documents]:
-[i] Comprimiendo '/home/pi/Documents' ...
-[OK] Backup creado: /home/pi/backups/backup_Documents_20261108_164847.tar.gz (16K)
-```
-
-### Ejemplo: archivos grandes
-
-```
-TAMAÑO     UBICACIÓN
-12M        /home/pi/Videos/clase.mp4
 ```
 
 En cada pregunta se puede presionar **Enter** para usar el valor de `config.conf`.
@@ -81,3 +70,12 @@ CANTIDAD_GRANDES=20               # máximo de archivos listados
 - `informe_recursos.log`: informes de CPU, memoria y disco
 - `archivos_grandes.log`: informes de archivos grandes
 
+## Cómo colaborar
+-Hacer un fork del repositorio.
+-Crear una rama: git checkout -b feature/mi-mejora.
+-Verificar la sintaxis con bash -n mantenimiento.sh.
+-Hacer commit y subir la rama.
+-Abrir un Pull Request explicando el cambio.
+## Licencia
+
+-Distribuido bajo la licencia MIT. Ver LICENSE.
