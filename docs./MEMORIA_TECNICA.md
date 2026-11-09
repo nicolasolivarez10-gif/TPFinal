@@ -1,8 +1,11 @@
-# Memoria Técnica — Herramienta de Mantenimiento del Sistema en Bash
+# Memoria Técnica —  Mantenimiento del Sistema Linux en Bash
 
 **Materia:** Sistemas Operativos
+
 **Instituto:** Instituto Superior IDRA — Tecnicatura Superior en Desarrollo de Software
+
 **Integrantes:** Nicolas Olivarez, Rodrigo Curcuy y Jeremias Maglione
+
 **Fecha:** Noviembre de 2026
 
 ---
@@ -34,7 +37,7 @@ Se desarrolló y probó en una máquina virtual (VirtualBox) con Raspberry Pi OS
 
 | Requisito | Detalle |
 |-----------|---------|
-| Sistema operativo | Linux (Raspberry Pi OS en VirtualBox; también funciona en Debian/Ubuntu) |
+| Sistema operativo | Linux (Raspberry Pi OS en VirtualBox; también funciona en Debian) |
 | Intérprete | Bash |
 | Herramientas | `tar`, `gzip`, `find`, `sort`, `head`, `awk`, `df`, `du`, `free`, `numfmt`, `tee` |
 | Permisos | Usuario común (no requiere `sudo`) |
