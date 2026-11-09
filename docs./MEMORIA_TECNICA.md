@@ -75,158 +75,143 @@ echo -e "${VERDE}[OK] ...${RESET}"
 
 Son códigos de escape ANSI: la terminal los interpreta como cambios de color. `echo -e` habilita la interpretación de `\e`. Se usa `RESET` para volver al color normal. Verde indica éxito, rojo error y amarillo información.
 
-⚙️ 3.3 Carga de la configuración
+## ⚙️ 3.3 Carga de la configuración
 
-El programa primero busca su carpeta principal y carga el archivo config.conf, donde se guardan las opciones de configuración.
+El programa primero busca su carpeta principal y carga el archivo `config.conf`, donde se guardan las opciones de configuración.
 
+```bash
 DIR_SCRIPT="$(cd "$(dirname "$0")" && pwd)"
 source "$DIR_SCRIPT/config.conf"
+```
 
-¿Qué hace cada parte?
+**¿Qué hace cada parte?**
 
-DIR_SCRIPT: guarda la ubicación del script.
+- `DIR_SCRIPT`: guarda la ubicación del script.
+- `dirname`: obtiene la carpeta donde está el script.
+- `pwd`: obtiene la ruta completa.
+- `source`: carga las variables del archivo de configuración.
 
-dirname: obtiene la carpeta donde está el script.
+Si el archivo no existe, se muestra un error y el programa termina con `exit 1`.
 
-pwd: obtiene la ruta completa.
+> **Objetivo:** Poder cambiar las opciones del programa sin modificar el código principal.
 
-source: carga las variables del archivo de configuración.
+---
 
-Si el archivo no existe, se muestra un error y el programa termina con exit 1.
-
-Objetivo: Poder cambiar las opciones del programa sin modificar el código principal.
-
-🧩 3.4 Funciones auxiliares
+## 🧩 3.4 Funciones auxiliares
 
 Son funciones que se utilizan varias veces durante el programa para evitar repetir código.
 
-registrar: guarda mensajes con fecha y hora en un archivo log.
+- **`registrar`:** guarda mensajes con fecha y hora en un archivo log.
+- **`mensaje_ok`:** muestra mensajes de éxito y los registra.
+- **`mensaje_error`:** muestra errores y los registra.
+- **`mensaje_info`:** muestra información en pantalla.
+- **`pausar`:** espera que el usuario presione Enter para continuar.
+- **`es_numero_positivo`:** comprueba que el valor ingresado sea un número entero mayor que cero.
 
-mensaje_ok: muestra mensajes de éxito y los registra.
+> **Objetivo:** Mantener el código más organizado y facilitar su lectura.
 
-mensaje_error: muestra errores y los registra.
+---
 
-mensaje_info: muestra información en pantalla.
-
-pausar: espera que el usuario presione Enter para continuar.
-
-es_numero_positivo: comprueba que el valor ingresado sea un número entero mayor que cero.
-
-Objetivo: Mantener el código más organizado y facilitar su lectura.
-
-📦 3.5 Tarea 1 — Respaldo
+## 📦 3.5 Tarea 1 — Respaldo
 
 Esta función permite crear una copia de seguridad de una carpeta.
 
-¿Cómo funciona?
+### ¿Cómo funciona?
 
-El usuario selecciona la carpeta que quiere respaldar.
+1. El usuario selecciona la carpeta que quiere respaldar.
+2. El programa verifica que la carpeta exista.
+3. Comprueba que el backup no se guarde dentro de la carpeta original.
+4. Crea un nombre para el respaldo utilizando la fecha y hora.
+5. Comprime la carpeta en un archivo `.tar.gz`.
+6. Si ocurre un error, elimina el archivo incompleto.
+7. Borra los backups antiguos según los días configurados.
 
-El programa verifica que la carpeta exista.
+### Comando principal
 
-Comprueba que el backup no se guarde dentro de la carpeta original.
-
-Crea un nombre para el respaldo utilizando la fecha y hora.
-
-Comprime la carpeta en un archivo .tar.gz.
-
-Si ocurre un error, elimina el archivo incompleto.
-
-Borra los backups antiguos según los días configurados.
-
-Comando principal
-
+```bash
 tar -czf "$archivo" -C "$(dirname "$origen")" "$nombre"
+```
 
-Explicación:
+**Explicación:**
 
-tar: crea el archivo de respaldo.
+- `tar`: crea el archivo de respaldo.
+- `-c`: indica que se va a crear un archivo.
+- `-z`: comprime su contenido.
+- `-f`: indica el nombre del archivo.
+- `-C`: indica desde qué carpeta se realiza el respaldo.
 
--c: indica que se va a crear un archivo.
+También se utiliza `find` para buscar y eliminar los respaldos antiguos.
 
--z: comprime su contenido.
+> **Resultado:** Se crea una copia de seguridad comprimida y se eliminan los backups viejos que cumplen las condiciones configuradas.
 
--f: indica el nombre del archivo.
+---
 
--C: indica desde qué carpeta se realiza el respaldo.
-
-También se utiliza find para buscar y eliminar los respaldos antiguos.
-
-Resultado: Se crea una copia de seguridad comprimida y se eliminan los backups viejos que cumplen las condiciones configuradas.
-
-📊 3.6 Tarea 2 — Informe de CPU, memoria y disco
+## 📊 3.6 Tarea 2 — Informe de CPU, memoria y disco
 
 Esta tarea permite consultar el uso de los recursos de la computadora.
 
-¿Qué información muestra?
+### ¿Qué información muestra?
 
-CPU: consulta el archivo /proc/stat dos veces, con un segundo de diferencia, para calcular aproximadamente el porcentaje de uso durante ese intervalo.
+**CPU:** consulta el archivo `/proc/stat` dos veces, con un segundo de diferencia, para calcular aproximadamente el porcentaje de uso durante ese intervalo.
 
-Carga promedio: utiliza /proc/loadavg para conocer la carga de trabajo del sistema.
+**Carga promedio:** utiliza `/proc/loadavg` para conocer la carga de trabajo del sistema.
 
-Memoria RAM: utiliza el comando free -m para mostrar la memoria utilizada y disponible en MB.
+**Memoria RAM:** utiliza el comando `free -m` para mostrar la memoria utilizada y disponible en MB.
 
-Disco: utiliza df -h para mostrar cuánto espacio está ocupado y cuánto queda disponible.
+**Disco:** utiliza `df -h` para mostrar cuánto espacio está ocupado y cuánto queda disponible.
 
-Comandos principales
+### Comandos principales
 
+```bash
 free -m
 df -h
+```
 
-free -m: muestra información de la memoria RAM.
+- `free -m`: muestra información de la memoria RAM.
+- `df -h`: muestra información del almacenamiento.
 
-df -h: muestra información del almacenamiento.
+Para guardar el informe se utiliza `tee -a`, que permite mostrar los resultados en pantalla y guardarlos en un archivo al mismo tiempo.
 
-Para guardar el informe se utiliza tee -a, que permite mostrar los resultados en pantalla y guardarlos en un archivo al mismo tiempo.
+**Archivo de registro:** `logs/informe_recursos.log`
 
-Archivo de registro: logs/informe_recursos.log
+> **Resultado:** Se puede conocer el estado de los recursos de la computadora y conservar un registro de los resultados.
 
-Resultado: Se puede conocer el estado de los recursos de la computadora y conservar un registro de los resultados.
+---
 
-🔎 3.7 Tarea 3 — Archivos grandes
+## 🔎 3.7 Tarea 3 — Archivos grandes
 
 Esta función permite encontrar los archivos que ocupan más espacio dentro de una carpeta.
 
-¿Cómo funciona?
+### ¿Cómo funciona?
 
-El usuario selecciona la carpeta donde quiere buscar.
+1. El usuario selecciona la carpeta donde quiere buscar.
+2. Ingresa el tamaño mínimo de los archivos en MB.
+3. El programa verifica que los datos sean correctos.
+4. Busca los archivos que superen el tamaño indicado.
+5. Ordena los resultados del más grande al más pequeño.
+6. Muestra una cantidad limitada de archivos.
+7. Guarda los resultados en un archivo log.
 
-Ingresa el tamaño mínimo de los archivos en MB.
+### Comando principal
 
-El programa verifica que los datos sean correctos.
-
-Busca los archivos que superen el tamaño indicado.
-
-Ordena los resultados del más grande al más pequeño.
-
-Muestra una cantidad limitada de archivos.
-
-Guarda los resultados en un archivo log.
-
-Comando principal
-
+```bash
 find "$dir" -type f -size +"${bytes}"c -printf '%s\t%p\n' 2>/dev/null \
     | sort -rn | head -n "$CANTIDAD_GRANDES"
+```
 
-Explicación:
+**Explicación:**
 
-find: busca archivos dentro de una carpeta.
+- `find`: busca archivos dentro de una carpeta.
+- `-type f`: busca solamente archivos.
+- `-size`: filtra los archivos según su tamaño.
+- `sort -rn`: ordena los resultados de mayor a menor.
+- `head -n`: limita la cantidad de resultados.
+- `2>/dev/null`: evita mostrar errores de permisos.
+- `numfmt`: convierte los tamaños a unidades fáciles de leer, como KB, MB o GB.
 
--type f: busca solamente archivos.
+**Archivo de registro:** `logs/archivos_grandes.log`
 
--size: filtra los archivos según su tamaño.
-
-sort -rn: ordena los resultados de mayor a menor.
-
-head -n: limita la cantidad de resultados.
-
-2>/dev/null: evita mostrar errores de permisos.
-
-numfmt: convierte los tamaños a unidades fáciles de leer, como KB, MB o GB.
-
-Archivo de registro: logs/archivos_grandes.log
-
-Resultado: Permite identificar archivos que ocupan mucho espacio y facilita el mantenimiento del disco.
+> **Resultado:** Permite identificar archivos que ocupan mucho espacio y facilita el mantenimiento del disco.
 ### 3.8 Menú interactivo
 
 ```bash
