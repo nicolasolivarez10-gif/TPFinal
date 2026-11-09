@@ -81,14 +81,3 @@ CANTIDAD_GRANDES=20               # máximo de archivos listados
 - `informe_recursos.log`: informes de CPU, memoria y disco
 - `archivos_grandes.log`: informes de archivos grandes
 
-## Cómo colaborar
-
-1. Hacer un **fork** del repositorio.
-2. Crear una rama: `git checkout -b feature/mi-mejora`.
-3. Verificar la sintaxis con `bash -n mantenimiento.sh`.
-4. Hacer commit y subir la rama.
-5. Abrir un **Pull Request** explicando el cambio.
-
-## Licencia
-
-Distribuido bajo la licencia **MIT**. Ver [LICENSE](LICENSE).
