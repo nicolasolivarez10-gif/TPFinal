@@ -1,4 +1,4 @@
-# 🛠️ Administracion de un sistema Linux
+# 🛠️ Mantenimiento de un sistema Linux
 
 Trabajo Final de **Sistemas Operativos** — Tecnicatura Superior en Desarrollo de Software, Instituto Superior IDRA.
 
@@ -43,8 +43,8 @@ trabajo-final-so/
 ## Uso
 
 ```bash
-git clone https://github.com/<usuario>/trabajo-final-so.git
-cd trabajo-final-so
+git clone https://github.com/nicolas.olivarez10-git/TPFinal.git
+cd TPFinal
 chmod +x mantenimiento.sh
 ./mantenimiento.sh
 ```
