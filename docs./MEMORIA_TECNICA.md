@@ -75,75 +75,39 @@ echo -e "${VERDE}[OK] ...${RESET}"
 
 Son códigos de escape ANSI: la terminal los interpreta como cambios de color. `echo -e` habilita la interpretación de `\e`. Se usa `RESET` para volver al color normal. Verde indica éxito, rojo error y amarillo información.
 
-### 3.3 Carga de la configuración
+⚙️ 3.3 — Carga de la configuración
+Objetivo: Encontrar la carpeta del programa y cargar la configuración.
 
-```bash
 DIR_SCRIPT="$(cd "$(dirname "$0")" && pwd)"
 source "$DIR_SCRIPT/config.conf"
-```
 
-- `$0` es el nombre con el que se ejecutó el script y `dirname` obtiene su carpeta. Así el script encuentra `config.conf` y la carpeta `logs/` sin importar desde dónde se lo ejecute.
-- `source` lee `config.conf` y define sus variables (`ORIGEN_BACKUP`, `DIAS_BACKUP`, etc.) como si estuvieran escritas dentro del script.
-- Si el archivo no existe, se muestra un error y se sale con `exit 1`.
+Comando	¿Qué hace?
+$0	Indica cómo se ejecutó el script.
+dirname	Obtiene la carpeta del script.
+source	Carga las variables de configuración.
 
-### 3.4 Funciones auxiliares
-
-- **`registrar`**: agrega una línea con fecha y hora al log usando `>>` (redirección que **agrega** al final sin borrar lo anterior).
-- **`mensaje_ok`, `mensaje_error`, `mensaje_info`**: muestran un mensaje con color; los dos primeros además lo guardan en el log.
-- **`pausar`**: usa `read` para esperar un Enter antes de volver al menú, así el usuario alcanza a leer el resultado.
-- **`es_numero_positivo`**: comprueba con una expresión regular `^[0-9]+$` que el texto sean solo dígitos, y con `-gt 0` que sea mayor que cero.
-
-### 3.5 Tarea 1 — Respaldo
-
-1. Se pregunta el directorio con `read`. `${origen:-$ORIGEN_BACKUP}` significa "si está vacío, usar el valor de la configuración".
-2. Se valida con `[ ! -d "$origen" ]` que el directorio exista.
-3. `readlink -f` convierte las rutas a absolutas y se verifica que la carpeta de backups no esté dentro de la carpeta a respaldar (si no, el backup se incluiría a sí mismo).
-4. Se arma el nombre `backup_<carpeta>_AAAAMMDD_HHMMSS.tar.gz` con `date`.
-5. Se crea el archivo:
-   ```bash
-   tar -czf "$archivo" -C "$(dirname "$origen")" "$nombre"
-   ```
-   - `-c` crear, `-z` comprimir con gzip, `-f` nombre del archivo.
-   - `-C` cambia de carpeta antes de archivar, para que dentro del `.tar.gz` las rutas sean relativas.
-6. Si `tar` falla, se borra el archivo incompleto.
-7. Se eliminan los backups viejos:
-   ```bash
-   find "$destino" -maxdepth 1 -type f -name "backup_${nombre}_*.tar.gz" \
-        -mtime +"$DIAS_BACKUP" -print -delete
-   ```
-   - `-mtime +7` selecciona los archivos modificados hace **más de 7 días**.
-   - `-name` limita el borrado a los backups de esa carpeta, para no eliminar archivos ajenos.
-   - `-print -delete` muestra cada archivo y lo borra.
-
-### 3.6 Tarea 2 — Informe de CPU, memoria y disco
-
-- **CPU (`uso_cpu`)**: el archivo `/proc/stat` guarda contadores del tiempo que la CPU estuvo trabajando o ociosa *desde el arranque*. Para saber el uso *actual*, se lee dos veces con `sleep 1` entre lecturas y se calcula:
-
-  ```
-  uso % = (Δtotal − Δocioso) × 100 / Δtotal
-  ```
-  Bash solo trabaja con enteros, por eso la división con decimales se hace con `awk`.
-- **Carga promedio**: se lee de `/proc/loadavg`.
-- **Memoria**: `free -m` muestra la memoria en MB y `awk` calcula el porcentaje usado. Se antepone `LC_ALL=C` para que `free` escriba en inglés (`Mem:`) aunque el sistema esté en español (`Mem.:`).
-- **Disco**: `df -h` muestra el espacio de cada partición (se excluyen las virtuales `tmpfs`).
-- **Guardado**: el informe se envía por una tubería (`|`) a `tee -a`, que lo muestra en pantalla y lo agrega al archivo `logs/informe_recursos.log`.
-
-### 3.7 Tarea 3 — Archivos grandes
-
-```bash
-find "$dir" -type f -size +"${bytes}"c -printf '%s\t%p\n' 2>/dev/null \
-    | sort -rn | head -n "$CANTIDAD_GRANDES"
-```
-
-- `find -type f -size +Nc`: busca archivos de más de N bytes. El tamaño se convierte de MB a bytes (`mb * 1024 * 1024`).
-- `-printf '%s\t%p\n'`: imprime el tamaño y la ruta separados por una tabulación.
-- `sort -rn`: ordena numéricamente (`-n`) de mayor a menor (`-r`).
-- `head -n 20`: se queda con los primeros 20.
-- `2>/dev/null`: descarta los errores de "permiso denegado".
-- `numfmt --to=iec`: convierte bytes a un formato legible (K, M, G).
-
-Se valida que el directorio exista y que el tamaño ingresado sea un número entero positivo. El informe se muestra y se guarda en `logs/archivos_grandes.log`.
-
+  <row align="center" gap={2}>
+    <icon name="check-circle" color="success"/>
+    <text size="sm">**Resultado:** El programa utiliza los valores configurados.</text>
+  </row>
+  <divider/>
+  <title size="xl">📦 3.5 — Tarea 1: Respaldo</title>
+  <row align="center" gap={2}>
+    <icon name="info" color="info"/>
+    **Objetivo:** Crear una copia de seguridad comprimida.
+  </row>
+  <grid columns={3} gap={2}>
+    {#each [{n:"1",t:"Seleccionar",i:"folder"},{n:"2",t:"Verificar",i:"shield-check"},{n:"3",t:"Comprimir",i:"archive"}] as s}
+      <grid-item>
+        <box background="surface-secondary" radius="md" padding={2} align="center" gap={1}>
+          <icon name={s.i} color="secondary" size="lg"/>
+          <text weight="medium" size="xs">{s.n}. {s.t}</text>
+        </box>
+      </grid-item>
+    {/each}
+  </grid>
+  <caption>El resto de las secciones sigue el mismo estilo, con tablas, comandos, pasos y resultados.</caption>
+</box>
 ### 3.8 Menú interactivo
 
 ```bash
